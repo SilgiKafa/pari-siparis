@@ -16,17 +16,19 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 30px;
-    position: relative;
+    position: sticky;
+    top: 0;
+    background: #f5f5f5;
+    padding: 10px 0;
+    z-index: 900;
 }
 
 h1 {
     text-align: center;
-    flex-grow: 1;
     font-size: 2.5em;
-    margin-bottom: 30px;
     color: #2c3e50;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     letter-spacing: 2px;
@@ -40,7 +42,10 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     transition: transform 0.2s;
-    margin-left: 10px;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 901;
 }
 
 .cart-icon:hover {
@@ -67,6 +72,9 @@ h1 {
     background-size: cover;
     background-position: center;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product-card:hover {
@@ -99,14 +107,16 @@ h1 {
 
 .product-card h3 {
     font-size: 1.5em;
-    margin: 10px 0;
+    margin: 10px 0 5px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 0 5px;
+    word-wrap: break-word;
 }
 
 .product-card p {
     font-size: 1.2em;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 0 0 5px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     display: inline-flex;
     gap: 5px;
@@ -119,7 +129,7 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin: 15px 0;
+    margin: 5px 0 10px 0;
     background: rgba(255, 255, 255, 0.1);
     padding: 10px;
     border-radius: 5px;
@@ -394,6 +404,25 @@ h1 {
         padding: 15px;
         font-size: 20px;
     }
+    
+    .product-card h3 {
+        font-size: 1.2em;
+    }
+    
+    .product-card p {
+        font-size: 1em;
+    }
+    
+    .quantity-control {
+        gap: 10px;
+        padding: 8px;
+    }
+    
+    .quantity-control button {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -423,5 +452,29 @@ h1 {
     .order-button, .clear-cart-button {
         padding: 12px;
         font-size: 18px;
+    }
+    
+    .product-card h3 {
+        font-size: 1em;
+    }
+    
+    .product-card p {
+        font-size: 0.9em;
+    }
+    
+    .quantity-control {
+        gap: 8px;
+        padding: 6px;
+    }
+    
+    .quantity-control button {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+    
+    .cart-icon {
+        right: 10px;
+        top: 10px;
     }
 } 
