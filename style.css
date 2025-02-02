@@ -179,7 +179,6 @@ h1 {
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.95);
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url('./pari.jpg');
     background-size: cover;
     background-position: center;
