@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Alışveriş Sayfası</title>
+    <title>PARİ SİPARİŞ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Ürünlerimiz</h1>
+            <h1>ÜRÜNLERİMİZ</h1>
             <div class="cart-icon" onclick="toggleCart()">
                 🛒 <span id="cart-count">0</span>
             </div>
@@ -22,7 +23,7 @@
 
             <div class="cart" id="cart">
                 <div class="cart-header">
-                    <h2>Sepetim</h2>
+                    <h2>SEPETİM</h2>
                     <button class="close-cart" onclick="toggleCart()">✕</button>
                 </div>
                 <div class="cart-items" id="cart-items">
@@ -31,7 +32,11 @@
                 <div class="cart-total">
                     Toplam: <span id="cart-total">0</span> TL
                 </div>
-                <button onclick="orderViaWhatsapp()" class="order-button">Sipariş Ver</button>
+                <button onclick="orderViaWhatsapp()" class="order-button">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Sipariş Ver</span>
+                </button>
+                <button onclick="clearCart()" class="clear-cart-button">Sepeti Boşalt</button>
             </div>
         </main>
     </div>

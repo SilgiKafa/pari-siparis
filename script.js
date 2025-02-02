@@ -1,18 +1,16 @@
 const products = [
-    { id: 1, name: "Ürün 1", price: 100, image: "https://via.placeholder.com/150" },
-    { id: 2, name: "Ürün 2", price: 200, image: "https://via.placeholder.com/150" },
-    { id: 3, name: "Ürün 3", price: 150, image: "https://via.placeholder.com/150" },
-    { id: 4, name: "Ürün 4", price: 300, image: "https://via.placeholder.com/150" },
-    { id: 5, name: "Ürün 5", price: 250, image: "https://via.placeholder.com/150" },
-    { id: 6, name: "Ürün 6", price: 180, image: "https://via.placeholder.com/150" },
-    { id: 7, name: "Ürün 7", price: 220, image: "https://via.placeholder.com/150" },
-    { id: 8, name: "Ürün 8", price: 190, image: "https://via.placeholder.com/150" },
-    { id: 9, name: "Ürün 9", price: 280, image: "https://via.placeholder.com/150" },
-    { id: 10, name: "Ürün 10", price: 320, image: "https://via.placeholder.com/150" },
+    { id: 1, name: "SARIMSAKLI EKMEK", price: 75, image: "https://images.unsplash.com/photo-1573821663912-569905455b1c?w=500" },
+    { id: 2, name: "MARGHERİTA", price: 100, image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=500" },
+    { id: 3, name: "KURU ETLİ", price: 150, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500" },
+    { id: 4, name: "MANTARLI", price: 110, image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500" },
+    { id: 5, name: "GİRİT VE KABAKLI", price: 120, image: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=500" },
+    { id: 6, name: "VEGAN", price: 170, image: "https://images.unsplash.com/photo-1542834369-f10ebf06d3e0?w=500" },
 ];
 
 // Sepeti localStorage'dan yükle
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+let lastRemovedCart = null; // Geri alma işlemi için son silinen sepeti sakla
 
 // Ürünleri sayfaya yükle
 function loadProducts() {
@@ -20,15 +18,15 @@ function loadProducts() {
     products.forEach(product => {
         const productElement = document.createElement('div');
         productElement.className = 'product-card';
+        productElement.style.backgroundImage = `url(${product.image})`;
         
         // Sepetteki mevcut miktar kontrolü
         const cartItem = cart.find(item => item.id === product.id);
         const currentQuantity = cartItem ? cartItem.quantity : 0;
         
         productElement.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
-            <p>${product.price} TL</p>
+            <p><span>${product.price}</span> <span>TL</span></p>
             <div class="quantity-control">
                 <button onclick="removeFromCart(${product.id})" class="remove-btn">-</button>
                 <span class="quantity-display" id="quantity-${product.id}">${currentQuantity}</span>
@@ -41,10 +39,17 @@ function loadProducts() {
 }
 
 // Bildirim göster
-function showNotification(message) {
+function showNotification(message, showUndo = false) {
     const notification = document.createElement('div');
     notification.className = 'notification';
-    notification.textContent = message;
+    if (showUndo) {
+        notification.innerHTML = `
+            <span>${message}</span>
+            <button class="undo-button" onclick="undoCartClear()">İşlemi Geri Al</button>
+        `;
+    } else {
+        notification.innerHTML = `<span>${message}</span>`;
+    }
     document.body.appendChild(notification);
 
     setTimeout(() => {
@@ -135,10 +140,10 @@ function updateCart() {
             <span>${item.name}</span>
             <div>
                 <button onclick="removeFromCart(${item.id})">-</button>
-                <span>${item.quantity}</span>
+                <span class="quantity">${item.quantity}</span>
                 <button onclick="addToCart(${item.id})">+</button>
             </div>
-            <span>${item.price * item.quantity} TL</span>
+            <span class="price">${item.price * item.quantity} TL</span>
         `;
         cartItems.appendChild(itemElement);
         total += item.price * item.quantity;
@@ -151,7 +156,29 @@ function updateCart() {
 // Sepeti göster/gizle
 function toggleCart() {
     const cart = document.getElementById('cart');
+    const overlay = document.querySelector('.overlay');
     cart.classList.toggle('active');
+    
+    // Overlay yoksa oluştur
+    if (!overlay) {
+        const newOverlay = document.createElement('div');
+        newOverlay.className = 'overlay';
+        document.body.appendChild(newOverlay);
+        newOverlay.addEventListener('click', toggleCart);
+    }
+    
+    // Overlay'i göster/gizle
+    const currentOverlay = document.querySelector('.overlay');
+    if (cart.classList.contains('active')) {
+        currentOverlay.classList.add('active');
+    } else {
+        currentOverlay.classList.remove('active');
+        setTimeout(() => {
+            if (currentOverlay && !cart.classList.contains('active')) {
+                currentOverlay.remove();
+            }
+        }, 300);
+    }
 }
 
 // WhatsApp üzerinden sipariş ver
@@ -178,6 +205,34 @@ function orderViaWhatsapp() {
     products.forEach(product => {
         updateQuantityDisplay(product.id);
     });
+}
+
+// Sepeti temizle
+function clearCart() {
+    if (confirm('Sepetteki tüm ürünleri silmek istediğinizden emin misiniz?')) {
+        lastRemovedCart = [...cart]; // Mevcut sepeti sakla
+        cart = [];
+        saveCartToStorage();
+        updateCart();
+        showNotification('Sepet temizlendi', true);
+        products.forEach(product => {
+            updateQuantityDisplay(product.id);
+        });
+    }
+}
+
+// Geri alma işlemi
+function undoCartClear() {
+    if (lastRemovedCart) {
+        cart = [...lastRemovedCart];
+        saveCartToStorage();
+        updateCart();
+        products.forEach(product => {
+            updateQuantityDisplay(product.id);
+        });
+        showNotification('İşlem geri alındı', true);
+        lastRemovedCart = null;
+    }
 }
 
 // Sayfa yüklendiğinde ürünleri göster
