@@ -11,7 +11,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 15px;
 }
 
 header {
@@ -27,17 +27,20 @@ h1 {
     flex-grow: 1;
     font-size: 2.5em;
     margin-bottom: 30px;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 2px;
 }
 
 .cart-icon {
     cursor: pointer;
-    font-size: 48px;
+    font-size: 36px;
     padding: 15px;
     background: white;
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     transition: transform 0.2s;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .cart-icon:hover {
@@ -159,9 +162,10 @@ h1 {
 
 .cart {
     position: fixed;
-    right: -400px;
+    right: -85%;
     top: 0;
-    width: 400px;
+    width: 85%;
+    max-width: 400px;
     height: 100vh;
     background: rgba(255, 255, 255, 0.95);
     padding: 20px;
@@ -212,21 +216,22 @@ h1 {
     margin: 10px 0;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    gap: 10px;
+    gap: 5px;
+    flex-wrap: wrap;
 }
 
 .cart-item span:first-child {
     font-size: 18px;
     font-weight: bold;
     flex: 1;
-    min-width: 150px;
+    min-width: 120px;
 }
 
 .cart-item > div {
     display: flex;
     align-items: center;
     gap: 2px;
-    min-width: 100px;
+    min-width: 80px;
     justify-content: center;
 }
 
@@ -359,4 +364,64 @@ h1 {
     background: #ff0000;
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* Responsive Tasarım */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .cart-icon {
+        font-size: 28px;
+        padding: 10px;
+    }
+    
+    .cart-item {
+        padding: 8px;
+    }
+    
+    .cart-item span:first-child {
+        font-size: 16px;
+        min-width: 100px;
+    }
+    
+    .order-button, .clear-cart-button {
+        padding: 15px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .cart-icon {
+        font-size: 24px;
+        padding: 8px;
+    }
+    
+    .cart {
+        width: 95%;
+        right: -95%;
+    }
+    
+    .cart-item span:first-child {
+        min-width: 90px;
+        font-size: 14px;
+    }
+    
+    .cart-item > div {
+        min-width: 70px;
+    }
+    
+    .order-button, .clear-cart-button {
+        padding: 12px;
+        font-size: 18px;
+    }
 } 
