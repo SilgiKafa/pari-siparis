@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alışveriş Sayfası</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ürünlerimiz</h1>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="products" id="products">
+                <!-- Ürünler JavaScript ile eklenecek -->
+            </div>
+
+            <div class="cart" id="cart">
+                <div class="cart-header">
+                    <h2>Sepetim</h2>
+                    <button class="close-cart" onclick="toggleCart()">✕</button>
+                </div>
+                <div class="cart-items" id="cart-items">
+                    <!-- Sepet öğeleri JavaScript ile eklenecek -->
+                </div>
+                <div class="cart-total">
+                    Toplam: <span id="cart-total">0</span> TL
+                </div>
+                <button onclick="orderViaWhatsapp()" class="order-button">Sipariş Ver</button>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
