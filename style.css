@@ -177,7 +177,12 @@ h1 {
     width: 85%;
     max-width: 400px;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.95);
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('./pari.jpg');
+    background-size: cover;
+    background-position: center;
     padding: 20px;
     box-shadow: -5px 0 15px rgba(0,0,0,0.2);
     transition: right 0.3s;
@@ -225,9 +230,11 @@ h1 {
     align-items: center;
     margin: 10px 0;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     gap: 5px;
     flex-wrap: wrap;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .cart-item span:first-child {
@@ -235,6 +242,7 @@ h1 {
     font-weight: bold;
     flex: 1;
     min-width: 120px;
+    color: white;
 }
 
 .cart-item > div {
@@ -249,11 +257,14 @@ h1 {
     margin: 0 2px;
     min-width: 30px;
     text-align: center;
+    color: white;
 }
 
 .cart-item .price {
     min-width: 80px;
     text-align: right;
+    color: white;
+    font-weight: bold;
 }
 
 .cart-item button {
@@ -477,4 +488,16 @@ h1 {
         right: 10px;
         top: 10px;
     }
+}
+
+.cart-header h2 {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cart-total {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 } 
