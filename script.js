@@ -183,7 +183,7 @@ function toggleCart() {
 
 // WhatsApp üzerinden sipariş ver
 function orderViaWhatsapp() {
-    const phoneNumber = "905523396844";
+    const phoneNumber = "905421617639";
     let message = "Yeni Sipariş:%0A";
     
     cart.forEach(item => {
