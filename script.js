@@ -261,7 +261,7 @@ function orderViaWhatsapp() {
     }
 
     // WhatsApp numarasını localStorage'dan al
-    const phoneNumber = localStorage.getItem('whatsappNumber') || '5523396844';
+    const phoneNumber = localStorage.getItem('whatsappNumber') || '5421617639';
     let message = "Yeni Sipariş:%0A";
     let stockUpdated = false;
     
