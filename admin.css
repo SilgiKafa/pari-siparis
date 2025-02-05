@@ -1,0 +1,617 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-info {
+    margin-top: 15px;
+}
+
+.stock-info {
+    color: #666;
+    margin: 10px 0;
+}
+
+.edit-btn {
+    width: 100%;
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.image-preview {
+    margin-top: 10px;
+    max-width: 200px;
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.save-btn, .cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.cancel-btn {
+    background: #666;
+    color: white;
+}
+
+/* Yeni buton stilleri */
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.header-buttons button {
+    flex: 1;
+    min-width: 120px;
+    max-width: 200px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.settings-btn {
+    background: #9b59b6;
+    color: white;
+}
+
+.settings-btn:hover, .settings-btn:active {
+    background: #8e44ad;
+    transform: translateY(-2px);
+}
+
+.add-product-btn {
+    background: #2196F3;
+    color: white;
+}
+
+.add-product-btn:hover, .add-product-btn:active {
+    background: #1976D2;
+    transform: translateY(-2px);
+}
+
+.save-all-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.save-all-btn:hover, .save-all-btn:active {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.logout-btn {
+    background: #ff4444;
+    color: white;
+}
+
+.logout-btn:hover, .logout-btn:active {
+    background: #ff0000;
+    transform: translateY(-2px);
+}
+
+/* Kaydetme animasyonu için */
+.saving {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Bildirim stili */
+.admin-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1000;
+    animation: slideIn 0.3s ease;
+}
+
+.success {
+    background: #4CAF50;
+}
+
+.error {
+    background: #ff4444;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Dosya yükleme alanı */
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* Switch toggle */
+.switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.switch-label {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Silme butonu */
+.delete-btn {
+    padding: 10px 20px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.delete-btn:hover {
+    background: #ff0000;
+}
+
+/* Pasif ürün kartı stili */
+.product-card.inactive {
+    opacity: 0.6;
+    position: relative;
+}
+
+.product-card.inactive::after {
+    content: 'PASİF';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4444;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+/* Cropper modal stilleri */
+.cropper-container {
+    max-width: 100%;
+    height: 400px;
+    margin: 20px 0;
+    background: #f0f0f0;
+    overflow: hidden;
+}
+
+#cropperImage {
+    max-width: 100%;
+    display: block;
+}
+
+.cropper-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.rotate-btn, .zoom-btn {
+    padding: 8px 15px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.rotate-btn:hover, .zoom-btn:hover {
+    background: #1976D2;
+    transform: translateY(-2px);
+}
+
+.rotate-btn i, .zoom-btn i {
+    font-size: 14px;
+}
+
+/* Cropper.js stilleri özelleştirme */
+.cropper-view-box,
+.cropper-face {
+    border-radius: 8px;
+}
+
+.cropper-line, .cropper-point {
+    background-color: #2196F3;
+}
+
+.cropper-bg {
+    background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+                      linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+                      linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Ayarlar butonu */
+.settings-btn {
+    padding: 10px 20px;
+    background: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.settings-btn:hover {
+    background: #8e44ad;
+    transform: translateY(-2px);
+}
+
+/* Ayarlar modal stili */
+.settings-modal {
+    max-width: 500px;
+}
+
+.phone-input {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.prefix {
+    color: #666;
+    font-size: 16px;
+    padding: 0 5px;
+    border-right: 1px solid #ddd;
+}
+
+.phone-input input {
+    border: none;
+    background: none;
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.phone-input input:focus {
+    outline: none;
+}
+
+.help-text {
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Numara değişiklik uyarısı */
+.number-change-alert {
+    background: #ffeaa7;
+    border-left: 4px solid #fdcb6e;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+.number-change-alert i {
+    color: #f39c12;
+    font-size: 20px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Header responsive tasarım */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .header-buttons {
+        justify-content: center;
+    }
+
+    .header-buttons button {
+        width: calc(50% - 5px);
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header-buttons button {
+        width: 100%;
+        font-size: 16px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* Modal responsive tasarım */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-buttons button {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+    }
+}
+
+/* Safari için özel düzenlemeler */
+@supports (-webkit-touch-callout: none) {
+    .header-buttons button {
+        padding: 12px 15px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"] {
+        font-size: 16px;
+    }
+
+    .modal-content {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Chrome için özel düzenlemeler */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .header-buttons button {
+        -webkit-appearance: none;
+    }
+
+    input[type="number"] {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+/* Ürün kartları responsive tasarım */
+@media screen and (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .product-card {
+        height: auto;
+    }
+
+    .product-image {
+        height: 150px;
+    }
+}
+
+/* Touch cihazlar için hover yerine active durumları */
+@media (hover: none) {
+    .header-buttons button:active {
+        transform: translateY(-2px);
+    }
+
+    .product-card:active {
+        transform: scale(1.02);
+    }
+}
+
+/* Animasyonlar için hardware acceleration */
+.header-buttons button,
+.product-card,
+.modal-content {
+    will-change: transform;
+    transform: translateZ(0);
+} 

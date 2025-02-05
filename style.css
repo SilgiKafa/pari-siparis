@@ -296,28 +296,51 @@ h1 {
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
+/* Bildirim stilleri */
 .notification {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 15px 25px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    border-radius: 5px;
-    z-index: 2000;
+    padding: 20px 30px;
+    border-radius: 8px;
+    z-index: 1000;
+    opacity: 1;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    min-width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-size: 1.1em;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
 }
 
-.notification .undo-button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+.notification.warning {
+    background: #ff6b6b;
+    border-left: 5px solid #ff4444;
+    font-weight: bold;
+}
+
+.notification.warning i {
+    margin-right: 10px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.notification:not(:last-child) {
+    margin-bottom: 70px;
+}
+
+.notification span {
+    display: block;
+    white-space: pre-line;
+    line-height: 1.4;
+    margin-bottom: 8px;
 }
 
 .order-button {
@@ -388,6 +411,31 @@ h1 {
     background: #ff0000;
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* Geri alma butonu stili */
+.notification .undo-button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.notification .undo-button:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.notification .undo-button i {
+    font-size: 14px;
 }
 
 /* Responsive Tasarım */
@@ -503,4 +551,173 @@ h1 {
     font-size: 1.2em;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Stok durumu stilleri */
+.stock-info {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.stock-info.out-of-stock {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.2);
+    border: 1px solid #ff4444;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.stock-info.low-stock {
+    color: #ffa500;
+    background: rgba(255, 165, 0, 0.1);
+}
+
+/* Admin giriş ikonu */
+.admin-login {
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+}
+
+.admin-icon {
+    font-size: 24px;
+    color: #2c3e50;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.admin-icon:hover {
+    color: #34495e;
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Login modal stilleri */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.login-modal {
+    background: white;
+    max-width: 400px;
+    width: 90%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: relative;
+    transform: translateY(-20px);
+    animation: modalSlideIn 0.3s ease forwards;
+}
+
+@keyframes modalSlideIn {
+    to {
+        transform: translateY(0);
+    }
+}
+
+.login-modal h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.login-modal .form-group {
+    margin-bottom: 20px;
+}
+
+.login-modal label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34495e;
+}
+
+.login-modal input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.login-modal input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.login-btn {
+    background: #3498db;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background: #95a5a6;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: #7f8c8d;
+}
+
+/* Hata mesajı stili */
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
 } 
